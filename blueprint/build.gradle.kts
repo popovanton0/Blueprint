@@ -68,7 +68,7 @@ dependencies {
 publishing {
     publications {
         register<MavenPublication>("release") {
-            groupId = "com.popovanton0.heartswitch"
+            groupId = "com.popovanton0.blueprint"
             artifactId = "blueprint"
             version = "1.0.0-alpha01"
 
