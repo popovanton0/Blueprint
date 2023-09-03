@@ -1,0 +1,190 @@
+# 📐 Blueprint 
+
+Visualize dimensions of your composables on a blueprint
+
+![Blueprint Usage Example](images/navbar-light.png#gh-dark-light-only)
+![Blueprint Usage Example](images/navbar-dark.png#gh-dark-mode-only)
+
+## The Problem
+
+Have you ever desired to see, what *exactly* is that padding's value while looking at the composable
+preview window? Especially when you are developing a button with 5 color styles, 3 sizes and 2 
+optional icons, and each combination of these parameters has different paddings?
+
+Combinatorial explosion of UI components in design systems requires having a lot of context about
+paddings, dp's, sizes, corer radiuses and other dimensional information in your head at the 
+same time.
+
+![Many combinations of buttons](images/combinations-light.png#gh-dark-light-only)
+![Many combinations of buttons](images/combinations-dark.png#gh-dark-mode-only)
+
+In addition, code to produce those combinations can get tricky to analyze. So, verification also 
+becomes hard: you make screenshots, move them to figma, overlay them on top, and try to see the 
+difference. Tedious 😩!
+
+## The Solution
+
+The Blueprint library provides a way to visualize dimensional information in your UI using simple
+DSL-based definition:
+
+1. Just wrap your target UI in `Blueprint` composable
+2. Mark children with [`Modifier.blueprintId(id: String)`](https://google.com) modifier
+3. Write the blueprint definition
+
+```kotlin
+Blueprint(
+    blueprintBuilder = {
+        widths {
+            group {
+                "item0".right lineTo "item1".left
+                "item0" lineTo "item0"
+                "item2" lineTo "item3"
+            }
+        }
+        heights {
+            group { "item0Icon" lineTo "item0Text" }
+            group { "item0" lineTo "item0" }
+            group(End) { "item3Icon".bottom lineTo "item3Text".top }
+        }
+    }
+) {
+    val items = remember { listOf("Songs", "Artists", "Playlists", "Settings") }
+    NavigationBar {
+        items.forEachIndexed { index, item ->
+            NavigationBarItem(
+                modifier = Modifier.blueprintId("item$index"),
+                icon = { Icon(Modifier.blueprintId("item${index}Icon"), TODO()) },
+                label = { Text(Modifier.blueprintId("item${index}Text"), TODO()) },
+                selected = index == 0,
+                onClick = { TODO() }
+            )
+        }
+    }
+}
+```
+
+### Preview
+
+![Blueprint Usage Example](images/navbar-light.png#gh-dark-light-only)
+![Blueprint Usage Example](images/navbar-dark.png#gh-dark-mode-only)
+
+### And another example:
+
+![Blueprint Usage Example](images/navbar-light.png#gh-dark-light-only)
+![Blueprint Usage Example](images/button-dark.png#gh-dark-mode-only)
+
+<details>
+<summary>More examples</summary>
+
+These are snapshots from snapshot testing:
+
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_almost none space to draw.png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow customization[0.0].png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow customization[15.0].png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow customization[45.0].png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow customization[90.0].png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_basicTest.png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_correct line widths and alignments.png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_customFontSizeAndColor.png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_emptyBlueprint.png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_fractional dp values rendering.png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_no blueprint if globally disabled.png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_not enough space to draw.png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_padding not applied.png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_reacts to blueprintBuilder update_(with_green).png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_reacts to blueprintBuilder update_(without_green).png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_size labels.png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when blueprint is disabled, it is not shown.png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when specifying blueprintIds that are not referenced in the composable, no dimensions are shown.png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when specifying blueprintIds that are then removed from the composition, dimensions are shown and then hidden_(with_green).png)
+![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when specifying blueprintIds that are then removed from the composition, dimensions are shown and then hidden_(without_green).png)
+
+</details>
+
+## Features
+
+You can customize
+1. Line and border strokes (width and color)
+2. Font size and color
+3. Arrow style (length, angle, round or square cap)
+4. Decimal precision of the dimensional values
+
+Of course, Blueprint works in Android Studio's Preview✨!
+
+Also, you can disable all the overhead of this library in your release builds by 
+disabling blueprint rendering using [`blueprintEnabled`](https://google.com) property.
+
+## Getting Started
+
+[![Release](https://jitpack.io/v/popovanton0/blueprint.svg)](https://jitpack.io/#popovanton0/blueprint)
+
+<details>
+<summary>Groovy</summary>
+
+Add the following code to your project's *root* `build.gradle` file:
+
+```groovy
+repositories {
+    maven { url "https://jitpack.io" }
+}
+```
+
+Next, add the dependency below to your _module_'s `build.gradle` file:
+
+```gradle
+dependencies {
+    implementation "com.github.popovanton0:blueprint:LATEST_VERSION"
+}
+```
+</details>
+
+<details open>
+<summary>Kotlin</summary>
+
+Add the following code to your project's *root* `settings.gradle.kts` file:
+
+```kotlin
+dependencyResolutionManagement {
+    // ...
+    repositories {
+        // ...
+        maven { url = uri("https://jitpack.io") }
+    }
+}
+```
+
+Next, add the dependency below to your _module_'s `build.gradle.kts` file:
+
+```kotlin
+dependencies {
+    implementation("com.github.popovanton0:blueprint:LATEST_VERSION")
+}
+```
+Or using Gradle Version Catalog:
+```toml
+[versions]
+blueprint = "LATEST_VERSION"
+
+[libraries]
+blueprint = { module = "com.github.popovanton0:blueprint", version.ref = "blueprint" }
+```
+</details>
+
+
+### Licence
+
+```
+Copyright 2023 Anton Popov
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
