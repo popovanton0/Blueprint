@@ -2,7 +2,7 @@
 
 Visualize dimensions of your composables on a blueprint
 
-![Blueprint Usage Example](images/navbar-light.png#gh-dark-light-only)
+![Blueprint Usage Example](images/navbar-light.png#gh-light-mode-only)
 ![Blueprint Usage Example](images/navbar-dark.png#gh-dark-mode-only)
 
 ## The Problem
@@ -15,7 +15,7 @@ Combinatorial explosion of UI components in design systems requires having a lot
 paddings, dp's, sizes, corer radiuses and other dimensional information in your head at the 
 same time.
 
-![Many combinations of buttons](images/combinations-light.png#gh-dark-light-only)
+![Many combinations of buttons](images/combinations-light.png#gh-light-mode-only)
 ![Many combinations of buttons](images/combinations-dark.png#gh-dark-mode-only)
 
 In addition, code to produce those combinations can get tricky to analyze. So, verification also 
@@ -28,7 +28,7 @@ The Blueprint library provides a way to visualize dimensional information in you
 DSL-based definition:
 
 1. Just wrap your target UI in `Blueprint` composable
-2. Mark children with [`Modifier.blueprintId(id: String)`](https://google.com) modifier
+2. Mark children with [`Modifier.blueprintId(id: String)`](https://github.com/popovanton0/Blueprint/blob/main/blueprint/src/main/java/com/popovanton0/blueprint/BlueprintId.kt) modifier
 3. Write the blueprint definition
 
 ```kotlin
@@ -65,12 +65,12 @@ Blueprint(
 
 ### Preview
 
-![Blueprint Usage Example](images/navbar-light.png#gh-dark-light-only)
+![Blueprint Usage Example](images/navbar-light.png#gh-light-mode-only)
 ![Blueprint Usage Example](images/navbar-dark.png#gh-dark-mode-only)
 
 ### And another example:
 
-![Blueprint Usage Example](images/navbar-light.png#gh-dark-light-only)
+![Blueprint Usage Example](images/button-light.png#gh-light-mode-only)
 ![Blueprint Usage Example](images/button-dark.png#gh-dark-mode-only)
 
 <details>
@@ -78,26 +78,18 @@ Blueprint(
 
 These are snapshots from snapshot testing:
 
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_almost none space to draw.png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow customization[0.0].png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow customization[15.0].png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow customization[45.0].png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow customization[90.0].png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_basicTest.png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_correct line widths and alignments.png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_customFontSizeAndColor.png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_emptyBlueprint.png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_fractional dp values rendering.png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_no blueprint if globally disabled.png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_not enough space to draw.png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_padding not applied.png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_reacts to blueprintBuilder update_(with_green).png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_reacts to blueprintBuilder update_(without_green).png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_size labels.png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when blueprint is disabled, it is not shown.png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when specifying blueprintIds that are not referenced in the composable, no dimensions are shown.png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when specifying blueprintIds that are then removed from the composition, dimensions are shown and then hidden_(with_green).png)
-![sdf](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when specifying blueprintIds that are then removed from the composition, dimensions are shown and then hidden_(without_green).png)
+|   |   |
+|---|---|
+| ![almost_none_space_to_draw](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_almost_none_space_to_draw.png)  | ![no_blueprint_if_globally_disabled](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_no_blueprint_if_globally_disabled.png)  |
+| ![arrow_customization 0](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow_customization[0.0].png)  | ![not_enough_space_to_draw](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_not_enough_space_to_draw.png)  |
+| ![arrow_customization 15](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow_customization[15.0].png)  | ![padding_not_applied](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_padding_not_applied.png)  |
+| ![arrow_customization 45](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow_customization[45.0].png)  | ![reacts_to_blueprint_builder_update_(with_green)](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_reacts_to_blueprint_builder_update_(with_green).png)  |
+| ![arrow_customization 90](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow_customization[90.0].png)  | ![reacts_to_blueprint_builder_update_(without_green)](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_reacts_to_blueprint_builder_update_(without_green).png)  |
+| ![basicTest](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_basicTest.png)  | ![size_labels](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_size_labels.png)  |
+| ![correct_line_widths_and_alignments](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_correct_line_widths_and_alignments.png)  | ![when_blueprint_is_disabled_it_is_not_shown](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when_blueprint_is_disabled_it_is_not_shown.png)  |
+| ![customFontSizeAndColor](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_customFontSizeAndColor.png)  | ![when_specifying_blueprint_ids_that_are_not_referenced_in_the_composable_no_dimensions_are_shown](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when_specifying_blueprint_ids_that_are_not_referenced_in_the_composable_no_dimensions_are_shown.png)  |
+| ![emptyBlueprint](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_emptyBlueprint.png)  | ![when_specifying_blueprint_ids_that_are_then_removed_from_the_composition_dimensions_are_shown_and_then_hidden_(with_green)](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when_specifying_blueprint_ids_that_are_then_removed_from_the_composition_dimensions_are_shown_and_then_hidden_(with_green).png)  |
+| ![fractional_dp_values_rendering](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_fractional_dp_values_rendering.png)  | ![when_specifying_blueprint_ids_that_are_then_removed_from_the_composition_dimensions_are_shown_and_then_hidden_(without_green)](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when_specifying_blueprint_ids_that_are_then_removed_from_the_composition_dimensions_are_shown_and_then_hidden_(without_green).png)  |
 
 </details>
 
@@ -112,7 +104,7 @@ You can customize
 Of course, Blueprint works in Android Studio's Preview✨!
 
 Also, you can disable all the overhead of this library in your release builds by 
-disabling blueprint rendering using [`blueprintEnabled`](https://google.com) property.
+disabling blueprint rendering using [`blueprintEnabled`](https://github.com/popovanton0/Blueprint/blob/main/blueprint/src/main/java/com/popovanton0/blueprint/Blueprint.kt) property.
 
 ## Getting Started
 

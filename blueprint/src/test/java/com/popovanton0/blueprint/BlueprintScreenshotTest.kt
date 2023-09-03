@@ -110,7 +110,7 @@ internal class BlueprintScreenshotTest {
     }
 
     @Test
-    fun `when blueprint is disabled, it is not shown`() = paparazzi.snapshotWrapper {
+    fun when_blueprint_is_disabled_it_is_not_shown() = paparazzi.snapshotWrapper {
         Blueprint(
             enabled = false,
             blueprintBuilder = { widths { group(Top) { "icon" lineTo "icon" } } },
@@ -119,7 +119,7 @@ internal class BlueprintScreenshotTest {
     }
 
     @Test
-    fun `when specifying blueprintIds that are not referenced in the composable, no dimensions are shown`() =
+    fun when_specifying_blueprint_ids_that_are_not_referenced_in_the_composable_no_dimensions_are_shown() =
         paparazzi.snapshotWrapper {
             Blueprint(blueprintBuilder = { widths { group { "lorem1" lineTo "lorem2" } } }) {
                 TestButton()
@@ -127,7 +127,7 @@ internal class BlueprintScreenshotTest {
         }
 
     @Test
-    fun `correct line widths and alignments`() = paparazzi.snapshotWrapper {
+    fun correct_line_widths_and_alignments() = paparazzi.snapshotWrapper {
         Blueprint(
             lineStroke = BorderStroke(3.dp, Color.Red),
             blueprintBuilder = {
@@ -169,7 +169,7 @@ internal class BlueprintScreenshotTest {
 
     @Suppress("JUnitMalformedDeclaration")
     @Test
-    fun `arrow customization`(
+    fun arrow_customization(
         @TestParameter("0", "15", "45", "90") angle: Float,
     ) {
         paparazzi.snapshotWrapper {
@@ -192,7 +192,7 @@ internal class BlueprintScreenshotTest {
     }
 
     @Test
-    fun `not enough space to draw`() = paparazzi.snapshotWrapper {
+    fun not_enough_space_to_draw() = paparazzi.snapshotWrapper {
         Box(
             modifier = Modifier
                 .requiredSize(50.dp)
@@ -206,7 +206,7 @@ internal class BlueprintScreenshotTest {
     }
 
     @Test
-    fun `almost none space to draw`() = paparazzi.snapshotWrapper {
+    fun almost_none_space_to_draw() = paparazzi.snapshotWrapper {
         Box(
             modifier = Modifier
                 .requiredSize(10.dp)
@@ -223,7 +223,7 @@ internal class BlueprintScreenshotTest {
     }
 
     @Test
-    fun `fractional dp values rendering`() = paparazzi.snapshotWrapper {
+    fun fractional_dp_values_rendering() = paparazzi.snapshotWrapper {
         Blueprint(blueprintBuilder = {
             widths { group { "1" lineTo "1" } }
             heights { group { "1" lineTo "1" } }
@@ -244,7 +244,7 @@ internal class BlueprintScreenshotTest {
         )
 
     @Test
-    fun `padding not applied`() = paparazzi.snapshotWrapper {
+    fun padding_not_applied() = paparazzi.snapshotWrapper {
         Row(modifier = Modifier.fillMaxWidth()) {
             LoremText(modifier = Modifier.weight(1f), words = 20)
             Column(modifier = Modifier.weight(1f)) {
@@ -272,7 +272,7 @@ internal class BlueprintScreenshotTest {
     }
 
     @Test
-    fun `size labels`() = paparazzi.snapshotWrapper {
+    fun size_labels() = paparazzi.snapshotWrapper {
         Blueprint(blueprintBuilder = {
             widths { group { "1" lineTo "1" } }
             heights { group { "1" lineTo "1" } }
@@ -280,7 +280,7 @@ internal class BlueprintScreenshotTest {
     }
 
     @Test
-    fun `no blueprint if globally disabled`() {
+    fun no_blueprint_if_globally_disabled() {
         blueprintEnabled = false
         paparazzi.snapshotWrapper {
             Blueprint(blueprintBuilder = {
@@ -292,7 +292,7 @@ internal class BlueprintScreenshotTest {
     }
 
     @Test
-    fun `when specifying blueprintIds that are then removed from the composition, dimensions are shown and then hidden`() {
+    fun when_specifying_blueprint_ids_that_are_then_removed_from_the_composition_dimensions_are_shown_and_then_hidden() {
         var showGreen by mutableStateOf(true)
         val content = @Composable {
             Blueprint(blueprintBuilder = {
@@ -323,7 +323,7 @@ internal class BlueprintScreenshotTest {
     }
 
     @Test
-    fun `reacts to blueprintBuilder update`() {
+    fun reacts_to_blueprint_builder_update() {
         var showGreenSize by mutableStateOf(true)
         val content = @Composable {
             Blueprint(blueprintBuilder = {
