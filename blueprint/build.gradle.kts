@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         minSdk = 21
-        compileSdkPreview = "UpsideDownCake"
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -70,7 +70,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.popovanton0.blueprint"
             artifactId = "blueprint"
-            version = "1.0.0-alpha01"
+            version = "1.0.0-alpha02"
 
             afterEvaluate {
                 from(components["release"])

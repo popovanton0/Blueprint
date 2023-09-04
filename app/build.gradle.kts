@@ -7,13 +7,12 @@ plugins {
 
 android {
     namespace = "com.popovanton0.blueprint.app"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
-        compileSdkPreview = "UpsideDownCake"
         applicationId = "com.popovanton0.blueprint.app"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 

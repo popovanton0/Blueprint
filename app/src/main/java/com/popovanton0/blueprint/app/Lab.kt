@@ -283,7 +283,7 @@ fun NavigationBarSample2() = Preview {
 }
 
 @Composable
-private fun ButtonDemo2() {
+private fun ButtonDemo2() = Box {
     val textSize = remember { Animatable(16f) }
     var strokeWidth by remember { mutableStateOf(1.dp) }
     LaunchedEffect(Unit) {
