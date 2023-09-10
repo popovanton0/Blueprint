@@ -16,7 +16,7 @@ public class BlueprintBuilderScope internal constructor() {
      * The placing order of groups is the following:
      * *first called -> placed closer to the composable*.
      *
-     * In other words: going out form the center, like in an onion.
+     * In other words: going out from the center, like in an onion.
      */
     public fun widths(block: HorizontalScope.() -> Unit) {
         val scope = HorizontalScope()
@@ -36,7 +36,7 @@ public class BlueprintBuilderScope internal constructor() {
      * The placing order of groups is the following:
      * *first called -> placed closer to the composable*.
      *
-     * In other words: going out form the center, like in an onion.
+     * In other words: going out from the center, like in an onion.
      */
     public fun heights(block: VerticalScope.() -> Unit) {
         val scope = VerticalScope()

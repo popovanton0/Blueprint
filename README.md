@@ -2,7 +2,7 @@
 
 [![Release](https://jitpack.io/v/popovanton0/blueprint.svg)](https://jitpack.io/#popovanton0/blueprint)
 
-Visualize dimensions of your composables on a blueprint
+Visualize the dimensions of your composables on a blueprint
 
 ![Blueprint Usage Example](images/navbar-light.png#gh-light-mode-only)
 ![Blueprint Usage Example](images/navbar-dark.png#gh-dark-mode-only)
@@ -10,26 +10,26 @@ Visualize dimensions of your composables on a blueprint
 ## The Problem
 
 Have you ever desired to see, what *exactly* is that padding's value while looking at the composable
-preview window? Especially when you are developing a button with 5 color styles, 3 sizes and 2 
-optional icons, and each combination of these parameters has different paddings?
+preview window? Especially when you are developing a button with 5 color styles, 3 sizes, and 2 
+optional icons; and each combination of these parameters has different paddings?
 
 Combinatorial explosion of UI components in design systems requires having a lot of context about
-paddings, dp's, sizes, corer radiuses and other dimensional information in your head at the 
+paddings, dp's, sizes, corner radiuses, and other dimensional information in your head at the 
 same time.
 
 ![Many combinations of buttons](images/combinations-light.png#gh-light-mode-only)
 ![Many combinations of buttons](images/combinations-dark.png#gh-dark-mode-only)
 
 In addition, code to produce those combinations can get tricky to analyze. So, verification also 
-becomes hard: you make screenshots, move them to figma, overlay them on top, and try to see the 
+becomes hard: you make screenshots, move them to Figma, overlay them on top, and try to see the 
 difference. Tedious 😩!
 
 ## The Solution
 
-The Blueprint library provides a way to visualize dimensional information in your UI using simple
+The Blueprint library provides a way to visualize dimensional information in your UI using a simple
 DSL-based definition:
 
-1. Just wrap your target UI in `Blueprint` composable
+1. Just wrap your target UI in a `Blueprint` composable
 2. Mark children with [`Modifier.blueprintId(id: String)`](https://github.com/popovanton0/Blueprint/blob/main/blueprint/src/main/java/com/popovanton0/blueprint/BlueprintId.kt) modifier
 3. Write the blueprint definition
 
@@ -107,7 +107,7 @@ Of course, Blueprint works in Android Studio's Preview✨!
 
 Also, you can disable all the overhead of this library in your release builds by either:
 1. Disabling blueprint rendering using [`blueprintEnabled`](https://github.com/popovanton0/Blueprint/blob/main/blueprint/src/main/java/com/popovanton0/blueprint/Blueprint.kt) property.
-2. Using `no-op` version of the library:
+2. Using the `no-op` version of the library:
     ```kotlin
     dependencies {
         debugImplementation("com.github.popovanton0.blueprint:blueprint:1.0.0-alpha02")
