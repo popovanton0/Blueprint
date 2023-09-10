@@ -110,8 +110,8 @@ Also, you can disable all the overhead of this library in your release builds by
 2. Using `no-op` version of the library:
     ```kotlin
     dependencies {
-        debugImplementation("com.github.popovanton0:blueprint:1.0.0-alpha02")
-        releaseImplementation("com.github.popovanton0:blueprint-no-op:1.0.0-alpha02")
+        debugImplementation("com.github.popovanton0.blueprint:blueprint:1.0.0-alpha02")
+        releaseImplementation("com.github.popovanton0.blueprint:blueprint-no-op:1.0.0-alpha02")
     }
    ```
 
@@ -134,7 +134,7 @@ Next, add the dependency below to your _module_'s `build.gradle` file:
 
 ```gradle
 dependencies {
-    implementation "com.github.popovanton0:blueprint:1.0.0-alpha02"
+    implementation "com.github.popovanton0.blueprint:blueprint:1.0.0-alpha02"
 }
 ```
 </details>
@@ -158,7 +158,7 @@ Next, add the dependency below to your _module_'s `build.gradle.kts` file:
 
 ```kotlin
 dependencies {
-    implementation("com.github.popovanton0:blueprint:1.0.0-alpha02")
+    implementation("com.github.popovanton0.blueprint:blueprint:1.0.0-alpha02")
 }
 ```
 Or using Gradle Version Catalog:
@@ -167,10 +167,13 @@ Or using Gradle Version Catalog:
 blueprint = "1.0.0-alpha02"
 
 [libraries]
-blueprint = { module = "com.github.popovanton0:blueprint", version.ref = "blueprint" }
+blueprint = { module = "com.github.popovanton0.blueprint:blueprint", version.ref = "blueprint" }
 ```
 </details>
 
+[!WARNING]
+Do not use this dependencyNotation: `com.github.popovanton0:blueprint:1.0.0-alpha02`. 
+It doesn't work!
 
 ### Licence
 
