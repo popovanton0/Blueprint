@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -55,6 +56,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -85,6 +87,22 @@ internal fun Preview(content: @Composable () -> Unit) =
     MaterialTheme(if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()) {
         Surface(content = content)
     }
+
+@Preview
+@Composable
+fun Sample() = Preview {
+    LazyRow {
+        items(4) {
+            Button(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Default.Home,
+                    contentDescription = null
+                )
+                Text(text = LoremIpsum(6).values.joinToString(separator = " "))
+            }
+        }
+    }
+}
 
 @Preview(widthDp = 750)
 @Preview(widthDp = 750, uiMode = Configuration.UI_MODE_NIGHT_YES)

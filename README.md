@@ -1,5 +1,7 @@
 # 📐 Blueprint 
 
+[![Release](https://jitpack.io/v/popovanton0/blueprint.svg)](https://jitpack.io/#popovanton0/blueprint)
+
 Visualize dimensions of your composables on a blueprint
 
 ![Blueprint Usage Example](images/navbar-light.png#gh-light-mode-only)
@@ -103,8 +105,15 @@ You can customize
 
 Of course, Blueprint works in Android Studio's Preview✨!
 
-Also, you can disable all the overhead of this library in your release builds by 
-disabling blueprint rendering using [`blueprintEnabled`](https://github.com/popovanton0/Blueprint/blob/main/blueprint/src/main/java/com/popovanton0/blueprint/Blueprint.kt) property.
+Also, you can disable all the overhead of this library in your release builds by either:
+1. Disabling blueprint rendering using [`blueprintEnabled`](https://github.com/popovanton0/Blueprint/blob/main/blueprint/src/main/java/com/popovanton0/blueprint/Blueprint.kt) property.
+2. Using `no-op` version of the library:
+    ```kotlin
+    dependencies {
+        debugImplementation("com.github.popovanton0:blueprint:1.0.0-alpha02")
+        releaseImplementation("com.github.popovanton0:blueprint-no-op:1.0.0-alpha02")
+    }
+   ```
 
 ## Getting Started
 
@@ -125,7 +134,7 @@ Next, add the dependency below to your _module_'s `build.gradle` file:
 
 ```gradle
 dependencies {
-    implementation "com.github.popovanton0:blueprint:LATEST_VERSION"
+    implementation "com.github.popovanton0:blueprint:1.0.0-alpha02"
 }
 ```
 </details>
@@ -149,13 +158,13 @@ Next, add the dependency below to your _module_'s `build.gradle.kts` file:
 
 ```kotlin
 dependencies {
-    implementation("com.github.popovanton0:blueprint:LATEST_VERSION")
+    implementation("com.github.popovanton0:blueprint:1.0.0-alpha02")
 }
 ```
 Or using Gradle Version Catalog:
 ```toml
 [versions]
-blueprint = "LATEST_VERSION"
+blueprint = "1.0.0-alpha02"
 
 [libraries]
 blueprint = { module = "com.github.popovanton0:blueprint", version.ref = "blueprint" }
