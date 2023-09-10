@@ -172,7 +172,7 @@ blueprint = { module = "com.github.popovanton0.blueprint:blueprint", version.ref
 </details>
 
 > [!WARNING]
-> Do not use this dependencyNotation: `com.github.popovanton0:blueprint:1.0.0-alpha02`. 
+> Do not use this dependency notation: `com.github.popovanton0:blueprint:1.0.0-alpha02`. 
 > It doesn't work!
 
 ### Licence
