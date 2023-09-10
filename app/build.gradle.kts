@@ -40,7 +40,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":blueprint-no-op"))
+    implementation(project(":blueprint"))
 
     implementation(libs.androidx.coreKtx)
     implementation(libs.androidx.lifecycleRuntimeKtx)
