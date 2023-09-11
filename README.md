@@ -2,7 +2,7 @@
 
 [![Release](https://jitpack.io/v/popovanton0/blueprint.svg)](https://jitpack.io/#popovanton0/blueprint)
 [![Introductory Medium Article](https://img.shields.io/badge/medium-article-grey?labelColor=black&logo=medium&logoColor=white&link=https://proandroiddev.com/blueprint-visualizing-paddings-in-jetpack-compose-eb62413c6d74)](https://proandroiddev.com/blueprint-visualizing-paddings-in-jetpack-compose-eb62413c6d74)
-![License](https://img.shields.io/github/license/airbnb/showkase?color=blue)
+![License](https://img.shields.io/github/license/popovanton0/Blueprint?color=blue)
 
 
 Visualize the dimensions of your composables on a blueprint
