@@ -70,7 +70,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.popovanton0.blueprint"
             artifactId = "blueprint-no-op"
-            version = "1.0.0-alpha02"
+            version = "1.0.0-alpha03"
 
             afterEvaluate {
                 from(components["release"])
