@@ -35,7 +35,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
-        freeCompilerArgs = listOf("-opt-in=com.popovanton0.blueprint.ExperimentalBlueprintApi")
+        freeCompilerArgs = listOf(
+            "-opt-in=com.popovanton0.blueprint.ExperimentalBlueprintApi",
+            "-Xexplicit-api=strict"
+        )
     }
 
     buildFeatures.compose = true

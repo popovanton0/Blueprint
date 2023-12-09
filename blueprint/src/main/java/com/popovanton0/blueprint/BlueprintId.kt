@@ -3,15 +3,14 @@ package com.popovanton0.blueprint
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.LayoutCoordinates
-import androidx.compose.ui.layout.OnGloballyPositionedModifier
-import androidx.compose.ui.modifier.ModifierLocalConsumer
-import androidx.compose.ui.modifier.ModifierLocalReadScope
-import androidx.compose.ui.platform.debugInspectorInfo
-import androidx.compose.ui.platform.inspectable
+import androidx.compose.ui.modifier.ModifierLocalModifierNode
+import androidx.compose.ui.node.GlobalPositionAwareModifierNode
+import androidx.compose.ui.node.ModifierNodeElement
+import androidx.compose.ui.platform.InspectorInfo
 import com.popovanton0.blueprint.dsl.SizeUnits
 
 /**
- * This modifier marks a UI composable with an [id] that can be used in blueprintBuilder to define
+ * This modifier marks a UI-composable with an [id] that can be used in blueprintBuilder to define
  * dimension lines between this composable and others.
  *
  * [id] must be **unique** for all children of the [Blueprint] composable.
@@ -27,50 +26,55 @@ public fun Modifier.blueprintId(
     id: String,
     sizeUnits: SizeUnits? = null
 ): Modifier = if (blueprintEnabled) {
-    inspectable(
-        inspectorInfo = debugInspectorInfo {
+    this then BlueprintMarkerElement(
+        id = id,
+        sizeUnits = sizeUnits,
+        inspectorInfo = {
             name = "blueprintId"
             properties["id"] = id
             properties["sizeUnits"] = sizeUnits
         }
-    ) {
-        BlueprintMarkerModifier(id, sizeUnits)
-    }
+    )
 } else {
     this
 }
 
-private class BlueprintMarkerModifier(
-    private val id: String,
-    private val sizeUnits: SizeUnits?,
-) : ModifierLocalConsumer, OnGloballyPositionedModifier {
+private class BlueprintMarkerElement(
+    val id: String,
+    val sizeUnits: SizeUnits?,
+    val inspectorInfo: InspectorInfo.() -> Unit,
+) : ModifierNodeElement<BlueprintMarkerNode>() {
+    override fun create(): BlueprintMarkerNode = BlueprintMarkerNode(id, sizeUnits)
 
-    private var markers: MutableMap<String, BlueprintMarker>? = null
-
-    override fun onModifierLocalsUpdated(scope: ModifierLocalReadScope) = with(scope) {
-        markers = ModifierLocalBlueprintMarkers.current
-    }
-
-    override fun onGloballyPositioned(coordinates: LayoutCoordinates) {
-        val markers = markers ?: return
-        if (coordinates.isAttached) {
-            markers.remove(id)
-            markers[id] = BlueprintMarker(coordinates, sizeUnits)
-        } else {
-            markers.remove(id)
-        }
+    override fun update(node: BlueprintMarkerNode) {
+        node.id = id
+        node.sizeUnits = sizeUnits
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (other !is BlueprintMarkerModifier) return false
-        if (id != other.id) return false
-        return sizeUnits == other.sizeUnits
+        val otherModifierElement = other as? BlueprintMarkerElement ?: return false
+        return id == otherModifierElement.id && sizeUnits == otherModifierElement.sizeUnits
     }
 
     override fun hashCode(): Int {
         var result = id.hashCode()
         result = 31 * result + (sizeUnits?.hashCode() ?: 0)
         return result
+    }
+
+    override fun InspectorInfo.inspectableProperties() {
+        inspectorInfo()
+    }
+}
+
+private class BlueprintMarkerNode(
+    var id: String,
+    var sizeUnits: SizeUnits?,
+) : Modifier.Node(), ModifierLocalModifierNode, GlobalPositionAwareModifierNode {
+
+    override fun onGloballyPositioned(coordinates: LayoutCoordinates) {
+        val markers = ModifierLocalBlueprintMarkers.current ?: return
+        markers.remove(id)
+        if (coordinates.isAttached) markers[id] = BlueprintMarker(coordinates, sizeUnits)
     }
 }
