@@ -3,7 +3,6 @@ package com.popovanton0.blueprint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,10 +22,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.cash.paparazzi.DeviceConfig.Companion.PIXEL_5
@@ -43,14 +45,15 @@ import com.popovanton0.blueprint.dsl.SizeUnits
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import kotlin.math.roundToInt
 
 @RunWith(TestParameterInjector::class)
 internal class BlueprintScreenshotTest {
     @get:Rule
     val paparazzi = Paparazzi(
         deviceConfig = PIXEL_5.copy(
-            screenWidth = 1500,
-            screenHeight = 1500,
+            screenWidth = 1800,
+            screenHeight = 1800,
             density = Density.XXXHIGH,
             softButtons = false,
         ),
@@ -322,6 +325,8 @@ internal class BlueprintScreenshotTest {
         paparazzi.snapshotWrapper(name = "(without green)") { content() }
     }
 
+    // todo add tests for absent arrow when dimension label does not fit
+
     @Test
     fun reacts_to_blueprint_builder_update() {
         var showGreenSize by mutableStateOf(true)
@@ -355,27 +360,53 @@ internal class BlueprintScreenshotTest {
 
     @Composable
     private fun TestUI(showSizeLabels: Boolean = false) {
-        Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
+        val spacerWidth = 20.dp
+        Column {
+            val size = 40.dp
             Box(
                 modifier = Modifier
-                    .size(40.dp)
+                    .size(size)
                     .background(Color.Green)
-                    .blueprintId("1", if (showSizeLabels) SizeUnits.Dp else null)
-            )
-            Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
-                Box(
-                    modifier = Modifier
-                        .size(50.dp)
-                        .background(Color.Blue)
-                        .blueprintId("2", if (showSizeLabels) SizeUnits.Dp else null)
-                )
-                Box(
-                    modifier = Modifier
-                        .size(50.dp)
-                        .background(Color.Yellow)
-                        .blueprintId("3", if (showSizeLabels) SizeUnits.Dp else null)
-                )
+                    .blueprintId("1", if (showSizeLabels) SizeUnits.Dp else null),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = "${size.value.roundToInt()}dp", fontSize = 6.sp)
             }
+            Spacer(Modifier.align(BiasAlignment.Horizontal(0.7f)), spacerWidth)
+            Row {
+                val size1 = 50.dp
+                Box(
+                    modifier = Modifier
+                        .size(size1)
+                        .background(Color.Blue)
+                        .blueprintId("2", if (showSizeLabels) SizeUnits.Dp else null),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = "${size1.value.roundToInt()}dp", fontSize = 6.sp)
+                }
+                Spacer(modifier = Modifier.align(Alignment.CenterVertically), spacerWidth = spacerWidth)
+                Box(
+                    modifier = Modifier
+                        .size(size1)
+                        .background(Color.Yellow)
+                        .blueprintId("3", if (showSizeLabels) SizeUnits.Dp else null),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = "${size1.value.roundToInt()}dp", fontSize = 6.sp)
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun Spacer(modifier: Modifier = Modifier, spacerWidth: Dp) {
+        Box(
+            modifier = modifier
+                .size(spacerWidth)
+                .background(Color.Green.copy(alpha = 0.2f)),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(text = "${spacerWidth.value.roundToInt()}dp", fontSize = 6.sp)
         }
     }
 

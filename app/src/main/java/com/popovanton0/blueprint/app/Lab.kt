@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -320,7 +321,7 @@ private fun ButtonDemo2() = Box {
 //            .size(100.dp)
 //            .border(1.dp, Color.Red)
             .padding(12.dp),
-//        lineStroke = BorderStroke(0.5.dp, Color.Red),
+        lineStroke = BorderStroke(2.dp, Color.Red),
 //        borderStroke = BorderStroke(1.dp, Color.Transparent),
 //        arrow = Arrow(length = 4.5.dp, angle = 35f, roundCap = false),
 //        fontSize = 4.sp,
@@ -339,7 +340,17 @@ private fun ButtonDemo2() = Box {
                 }
                 group { "icon" lineTo "text" }
 //                group(Top) { "icon".center lineTo "text".right }
-                group(Top) { "icon".left lineTo "text".left }
+                group(Top) {
+                    "smol" lineTo "smol"
+                    "icon".left lineTo "text".left
+                }
+                group(Top) {
+                    "smol2" lineTo "smol2"
+                    "icon".left lineTo "text".left
+                }
+                group(Top) {
+                    "smol2" lineTo "smol3"
+                }
             }
 //            return@Blueprint
             if (true) heights {
@@ -347,10 +358,10 @@ private fun ButtonDemo2() = Box {
 //                group { "icon".top lineTo "icon2".bottom }
                 group { "icon" lineTo "icon" }
                 group(End) {
-//                    "text" spLineTo "text"
-//                    "text2" spLineTo "text2"
+                    "text" spLineTo "text"
+                    "text2" spLineTo "text2"
                 }
-//                group(End) { "text" spLineTo "text2" }
+                group(End) { "text" spLineTo "text2" }
             }
         }
     ) {
@@ -358,14 +369,38 @@ private fun ButtonDemo2() = Box {
             if (true) Button(modifier = Modifier, onClick = { }) {
                 if (textSize.value < 22f) Icon(
                     modifier = Modifier
-                        .size(40.dp)
+                        .size(20.dp)
                         .blueprintId("icon", null)
-                        .padding(10.dp)
+                        .padding(4.dp)
                         .blueprintId("icon2", null),
                     imageVector = Icons.Default.Home,
                     contentDescription = null
                 )
                 Column {
+                    if (false)Row(
+                        modifier = Modifier.align(Alignment.CenterHorizontally),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .requiredSize(8.dp)
+                                .background(Color.Green)
+                                .blueprintId("smol")
+                        )
+                        Box(
+                            modifier = Modifier
+                                .requiredSize(14.dp)
+                                .background(Color.Green)
+                                .blueprintId("smol2")
+                        )
+                        Box(
+                            modifier = Modifier
+                                .requiredSize(14.dp)
+                                .background(Color.Green)
+                                .blueprintId("smol3")
+                        )
+
+                    }
                     Text(
                         modifier = Modifier.blueprintId("text"),
                         text = "Lorem ".repeat(1),

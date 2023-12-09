@@ -3,9 +3,12 @@ package com.popovanton0.blueprint.dsl
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.isFinite
 import androidx.compose.ui.unit.isSpecified
+import androidx.compose.ui.unit.times
+import kotlin.math.cos
+import kotlin.math.sin
 
 /**
- * Arrow that is extending from the dimension lines in 4 directions
+ * Arrow extending from the dimension lines in four directions
  */
 public class Arrow(
     public val length: Dp,
@@ -18,6 +21,12 @@ public class Arrow(
         }
         require(angle in 0f..90f) { "Invalid arrow angle: must be in [0..180]" }
     }
+
+    internal fun projectionOnDimensionLine(strokeWidth: Dp): Dp =
+        cos(Math.toRadians(angle.toDouble())) * (length + strokeWidth)
+
+    internal fun projectionOnExtendingLine(strokeWidth: Dp): Dp =
+        sin(Math.toRadians(angle.toDouble())) * (length + strokeWidth)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
