@@ -257,13 +257,15 @@ private fun rememberGroupSpace(
     textMeasurer: TextMeasurer,
     arrow: Arrow?,
 ): GroupSpace = with(LocalDensity.current) {
-    remember(lineWidth, textStyle, textMeasurer) {
+    remember(lineWidth, textStyle, textMeasurer, arrow) {
         val textLayoutResult = textMeasurer.measure(
             text = "99.${"9".repeat(precision)}sp",
             style = textStyle,
             maxLines = 1,
         )
-        val arrowPadding = arrow?.projectionOnExtendingLine(lineWidth) ?: TextPaddingWhenNoArrow
+        val arrowPadding = arrow?.projectionOnExtendingLine(lineWidth)
+            ?.coerceAtLeast(MinimumTextArrowPadding)
+            ?: MinimumTextArrowPadding
         GroupSpace(
             horizontal = lineWidth + arrowPadding * 2 + textLayoutResult.size.height.toDp(),
             vertical = lineWidth + arrowPadding * 2 + textLayoutResult.size.width.toDp(),
@@ -334,8 +336,10 @@ private fun DrawScope.drawBlueprint(params: Params) = with(params) {
 
                 val isNotEnoughSpaceForLabel = drawLabel(
                     params, group, label = label,
-                    textPadding =
-                    arrow?.projectionOnExtendingLine(strokeWidth = 0.dp)?.toPx() ?: 0f,
+                    arrowPadding = arrow?.projectionOnExtendingLine(strokeWidth = 0.dp)
+                        ?.coerceAtLeast(MinimumTextArrowPadding)
+                        ?.toPx()
+                        ?: MinimumTextArrowPadding.toPx(),
                     firstExtendingLine.endOffset,
                     secondExtendingLine.endOffset,
                 )
@@ -569,22 +573,21 @@ private fun DrawScope.drawLabel(
     params: Params,
     group: Group,
     label: String,
-    textPadding: Float,
+    arrowPadding: Float,
     start: Offset,
     end: Offset,
 ): Boolean = with(params) {
     val halfLineWidth = lineWidthPx / 2f
-    val paddingWhenNoArrow = if (arrow == null) TextPaddingWhenNoArrow.toPx() else 0f
 
     val topLeft: Offset = when (group) {
         is HorizontalGroup -> when (group.position) {
             Bottom -> start - Offset(0f, groupSpace.horizontal.toPx())
-            Top -> start + Offset(0f, textPadding)
+            Top -> start + Offset(0f, arrowPadding)
             else -> error("Unreachable")
         }
 
         is VerticalGroup -> when (group.position.toRtl(isRtl)) {
-            Start -> start + Offset(textPadding + paddingWhenNoArrow, 0f)
+            Start -> start + Offset(arrowPadding, 0f)
             End -> start - Offset(groupSpace.vertical.toPx(), 0f)
             else -> error("Unreachable")
         }
@@ -592,14 +595,14 @@ private fun DrawScope.drawLabel(
 
     val size: Offset = when (group) {
         is HorizontalGroup -> when (group.position) {
-            Bottom -> end - Offset(0f, textPadding)
+            Bottom -> end - Offset(0f, arrowPadding)
             Top -> end + Offset(0f, groupSpace.horizontal.toPx())
             else -> error("Unreachable")
         }
 
         is VerticalGroup -> when (group.position.toRtl(isRtl)) {
             Start -> end + Offset(groupSpace.vertical.toPx(), 0f)
-            End -> end - Offset(textPadding + +paddingWhenNoArrow, 0f)
+            End -> end - Offset(arrowPadding, 0f)
             else -> error("Unreachable")
         }
     } - Offset(halfLineWidth, halfLineWidth)
@@ -757,7 +760,7 @@ private val invertColorFilter = ColorFilter.colorMatrix(
  * If true, debugging drawings are rendered. They help to develop the blueprint library
  */
 private const val DEBUG = false
-private val TextPaddingWhenNoArrow = 2.dp
+private val MinimumTextArrowPadding = 2.dp
 private val TextOnSmallDimensionCornerRadius = 1.dp
 
 private val LabelTextStyle = TextStyle.Default.copy(

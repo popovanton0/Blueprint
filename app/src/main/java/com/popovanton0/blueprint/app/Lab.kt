@@ -316,14 +316,15 @@ private fun ButtonDemo2() = Box {
         text = "sdfsdf",
 //        fontSize = textSize.value.sp
     )
+    val lineWidth = 1.5.dp
     Blueprint(
         modifier = Modifier
 //            .size(100.dp)
 //            .border(1.dp, Color.Red)
             .padding(12.dp),
-        lineStroke = BorderStroke(2.dp, Color.Red),
+        lineStroke = BorderStroke(lineWidth, Color.Red),
 //        borderStroke = BorderStroke(1.dp, Color.Transparent),
-//        arrow = Arrow(length = 4.5.dp, angle = 35f, roundCap = false),
+//        arrow = Arrow(length = lineWidth*3, angle = 35f, roundCap = false),
 //        fontSize = 4.sp,
         precision = 1,
         densityRounding = true,

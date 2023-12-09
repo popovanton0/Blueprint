@@ -1,12 +1,10 @@
-# 📐 Blueprint 
+# 📐 Blueprint
 
 [![Release](https://jitpack.io/v/popovanton0/blueprint.svg)](https://jitpack.io/#popovanton0/blueprint)
 [![Introductory Medium Article](https://img.shields.io/badge/medium-article-grey?labelColor=black&logo=medium&logoColor=white&link=https://proandroiddev.com/blueprint-visualizing-paddings-in-jetpack-compose-eb62413c6d74)](https://proandroiddev.com/blueprint-visualizing-paddings-in-jetpack-compose-eb62413c6d74)
 ![License](https://img.shields.io/github/license/popovanton0/Blueprint?color=blue)
 
-
 Visualize the dimensions of your composables on a blueprint
-
 
 ![Blueprint Usage Example](images/navbar-light.png#gh-light-mode-only)
 ![Blueprint Usage Example](images/navbar-dark.png#gh-dark-mode-only)
@@ -16,18 +14,18 @@ Visualize the dimensions of your composables on a blueprint
 ## The Problem
 
 Have you ever desired to see, what *exactly* is that padding's value while looking at the composable
-preview window? Especially when you are developing a button with 5 color styles, 3 sizes, and 2 
+preview window? Especially when you are developing a button with 5 color styles, 3 sizes, and 2
 optional icons; and each combination of these parameters has different paddings?
 
 Combinatorial explosion of UI components in design systems requires having a lot of context about
-paddings, dp's, sizes, corner radiuses, and other dimensional information in your head at the 
+paddings, dp's, sizes, corner radiuses, and other dimensional information in your head at the
 same time.
 
 ![Many combinations of buttons](images/combinations-light.png#gh-light-mode-only)
 ![Many combinations of buttons](images/combinations-dark.png#gh-dark-mode-only)
 
-In addition, code to produce those combinations can get tricky to analyze. So, verification also 
-becomes hard: you make screenshots, move them to Figma, overlay them on top, and try to see the 
+In addition, code to produce those combinations can get tricky to analyze. So, verification also
+becomes hard: you make screenshots, move them to Figma, overlay them on top, and try to see the
 difference. Tedious 😩!
 
 ## The Solution
@@ -36,7 +34,9 @@ The Blueprint library provides a way to visualize dimensional information in you
 DSL-based definition:
 
 1. Just wrap your target UI in a `Blueprint` composable
-2. Mark children with [`Modifier.blueprintId(id: String)`](https://github.com/popovanton0/Blueprint/blob/main/blueprint/src/main/java/com/popovanton0/blueprint/BlueprintId.kt) modifier
+2. Mark children
+   with [`Modifier.blueprintId(id: String)`](https://github.com/popovanton0/Blueprint/blob/main/blueprint/src/main/java/com/popovanton0/blueprint/BlueprintId.kt)
+   modifier
 3. Write the blueprint definition
 
 ```kotlin
@@ -82,28 +82,37 @@ Blueprint(
 ![Blueprint Usage Example](images/button-dark.png#gh-dark-mode-only)
 
 <details>
+<summary>Correct arrow padding rendering animation</summary>
+
+[Arrow angle animation.mov](images/arrow-angle-anim.mov)
+[Arrow angle animation in debug mode.mov](images/arrow-angle-anim-debug.mov)
+
+</details>
+
+<details>
 <summary>More examples</summary>
 
 These are snapshots from snapshot testing:
 
-|   |   |
-|---|---|
-| ![almost_none_space_to_draw](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_almost_none_space_to_draw.png)  | ![no_blueprint_if_globally_disabled](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_no_blueprint_if_globally_disabled.png)  |
-| ![arrow_customization 0](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow_customization[0.0].png)  | ![not_enough_space_to_draw](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_not_enough_space_to_draw.png)  |
-| ![arrow_customization 15](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow_customization[15.0].png)  | ![padding_not_applied](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_padding_not_applied.png)  |
-| ![arrow_customization 45](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow_customization[45.0].png)  | ![reacts_to_blueprint_builder_update_(with_green)](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_reacts_to_blueprint_builder_update_(with_green).png)  |
-| ![arrow_customization 90](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow_customization[90.0].png)  | ![reacts_to_blueprint_builder_update_(without_green)](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_reacts_to_blueprint_builder_update_(without_green).png)  |
-| ![basicTest](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_basicTest.png)  | ![size_labels](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_size_labels.png)  |
-| ![correct_line_widths_and_alignments](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_correct_line_widths_and_alignments.png)  | ![when_blueprint_is_disabled_it_is_not_shown](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when_blueprint_is_disabled_it_is_not_shown.png)  |
-| ![customFontSizeAndColor](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_customFontSizeAndColor.png)  | ![when_specifying_blueprint_ids_that_are_not_referenced_in_the_composable_no_dimensions_are_shown](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when_specifying_blueprint_ids_that_are_not_referenced_in_the_composable_no_dimensions_are_shown.png)  |
-| ![emptyBlueprint](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_emptyBlueprint.png)  | ![when_specifying_blueprint_ids_that_are_then_removed_from_the_composition_dimensions_are_shown_and_then_hidden_(with_green)](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when_specifying_blueprint_ids_that_are_then_removed_from_the_composition_dimensions_are_shown_and_then_hidden_(with_green).png)  |
-| ![fractional_dp_values_rendering](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_fractional_dp_values_rendering.png)  | ![when_specifying_blueprint_ids_that_are_then_removed_from_the_composition_dimensions_are_shown_and_then_hidden_(without_green)](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when_specifying_blueprint_ids_that_are_then_removed_from_the_composition_dimensions_are_shown_and_then_hidden_(without_green).png)  |
+|                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                            |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ![almost_none_space_to_draw](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_almost_none_space_to_draw.png)                   | ![no_blueprint_if_globally_disabled](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_no_blueprint_if_globally_disabled.png)                                                                                                                                                                                         |
+| ![arrow_customization 0](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow_customization[0.0].png)                        | ![not_enough_space_to_draw](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_not_enough_space_to_draw.png)                                                                                                                                                                                                           |
+| ![arrow_customization 15](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow_customization[15.0].png)                      | ![padding_not_applied](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_padding_not_applied.png)                                                                                                                                                                                                                     |
+| ![arrow_customization 45](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow_customization[45.0].png)                      | ![reacts_to_blueprint_builder_update_(with_green)](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_reacts_to_blueprint_builder_update_(with_green).png)                                                                                                                                                             |
+| ![arrow_customization 90](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_arrow_customization[90.0].png)                      | ![reacts_to_blueprint_builder_update_(without_green)](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_reacts_to_blueprint_builder_update_(without_green).png)                                                                                                                                                       |
+| ![basicTest](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_basicTest.png)                                                   | ![size_labels](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_size_labels.png)                                                                                                                                                                                                                                     |
+| ![correct_line_widths_and_alignments](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_correct_line_widths_and_alignments.png) | ![when_blueprint_is_disabled_it_is_not_shown](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when_blueprint_is_disabled_it_is_not_shown.png)                                                                                                                                                                       |
+| ![customFontSizeAndColor](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_customFontSizeAndColor.png)                         | ![when_specifying_blueprint_ids_that_are_not_referenced_in_the_composable_no_dimensions_are_shown](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when_specifying_blueprint_ids_that_are_not_referenced_in_the_composable_no_dimensions_are_shown.png)                                                             |
+| ![emptyBlueprint](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_emptyBlueprint.png)                                         | ![when_specifying_blueprint_ids_that_are_then_removed_from_the_composition_dimensions_are_shown_and_then_hidden_(with_green)](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when_specifying_blueprint_ids_that_are_then_removed_from_the_composition_dimensions_are_shown_and_then_hidden_(with_green).png)       |
+| ![fractional_dp_values_rendering](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_fractional_dp_values_rendering.png)         | ![when_specifying_blueprint_ids_that_are_then_removed_from_the_composition_dimensions_are_shown_and_then_hidden_(without_green)](/blueprint/src/test/snapshots/images/com.popovanton0.blueprint_BlueprintScreenshotTest_when_specifying_blueprint_ids_that_are_then_removed_from_the_composition_dimensions_are_shown_and_then_hidden_(without_green).png) |
 
 </details>
 
 ## Features
 
 You can customize
+
 1. Line and border strokes (width and color)
 2. Font size and color
 3. Arrow style (length, angle, round or square cap)
@@ -112,7 +121,10 @@ You can customize
 Of course, Blueprint works in Android Studio's Preview✨!
 
 Also, you can disable all the overhead of this library in your release builds by either:
-1. Disabling blueprint rendering using [`blueprintEnabled`](https://github.com/popovanton0/Blueprint/blob/main/blueprint/src/main/java/com/popovanton0/blueprint/Blueprint.kt) property.
+
+1. Disabling blueprint rendering
+   using [`blueprintEnabled`](https://github.com/popovanton0/Blueprint/blob/main/blueprint/src/main/java/com/popovanton0/blueprint/Blueprint.kt)
+   property.
 2. Using the `no-op` version of the library:
     ```kotlin
     dependencies {
@@ -143,6 +155,7 @@ dependencies {
     implementation "com.github.popovanton0.blueprint:blueprint:1.0.0-alpha04"
 }
 ```
+
 </details>
 
 <details open>
@@ -167,7 +180,9 @@ dependencies {
     implementation("com.github.popovanton0.blueprint:blueprint:1.0.0-alpha04")
 }
 ```
+
 Or using Gradle Version Catalog:
+
 ```toml
 [versions]
 blueprint = "1.0.0-alpha04"
@@ -175,10 +190,11 @@ blueprint = "1.0.0-alpha04"
 [libraries]
 blueprint = { module = "com.github.popovanton0.blueprint:blueprint", version.ref = "blueprint" }
 ```
+
 </details>
 
 > [!WARNING]
-> Do not use this dependency notation: `com.github.popovanton0:blueprint:1.0.0-alpha04`. 
+> Do not use this dependency notation: `com.github.popovanton0:blueprint:1.0.0-alpha04`.
 > It doesn't work!
 
 ### Licence
