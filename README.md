@@ -83,16 +83,18 @@ Blueprint(
 
 ### Correct arrow padding rendering animation
 
-[Arrow angle animation.mov](images/arrow-angle-anim.mp4)
+https://github.com/popovanton0/Blueprint/assets/15000556/7a90b534-3c7e-437a-8e08-1fdd4329c752
 
 <details>
 <summary>Debug</summary>
-[Arrow angle animation in debug mode.mov](images/arrow-angle-anim-debug.mp4)
+
+https://github.com/popovanton0/Blueprint/assets/15000556/535a016f-0ca9-41d2-8e52-2ed7b36fbdc0
+
 </details>
 
 <details>
 <summary>More examples</summary>
-
+<br>
 These are snapshots from snapshot testing:
 
 |                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                            |
