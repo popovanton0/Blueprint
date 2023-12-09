@@ -81,12 +81,13 @@ Blueprint(
 ![Blueprint Usage Example](images/button-light.png#gh-light-mode-only)
 ![Blueprint Usage Example](images/button-dark.png#gh-dark-mode-only)
 
+### Correct arrow padding rendering animation
+
+[Arrow angle animation.mov](images/arrow-angle-anim.mp4)
+
 <details>
-<summary>Correct arrow padding rendering animation</summary>
-
-[Arrow angle animation.mov](images/arrow-angle-anim.mov)
-[Arrow angle animation in debug mode.mov](images/arrow-angle-anim-debug.mov)
-
+<summary>Debug</summary>
+[Arrow angle animation in debug mode.mov](images/arrow-angle-anim-debug.mp4)
 </details>
 
 <details>
