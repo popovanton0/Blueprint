@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.popovanton0.blueprint.app"
-    compileSdk = 34
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.popovanton0.blueprint.app"

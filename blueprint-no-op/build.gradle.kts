@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace = "com.popovanton0.blueprint"
-    compileSdk = 33
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         minSdk = 21
@@ -70,7 +70,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "com.popovanton0.blueprint"
             artifactId = "blueprint-no-op"
-            version = "1.0.0-alpha04"
+            version = libs.versions.blueprint.get()
 
             afterEvaluate {
                 from(components["release"])
