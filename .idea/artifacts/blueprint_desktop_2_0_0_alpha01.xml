@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="blueprint-desktop-2.0.0-alpha01">
+    <output-path>$PROJECT_DIR$/blueprint/build/libs</output-path>
+    <root id="archive" name="blueprint-desktop-2.0.0-alpha01.jar" />
+  </artifact>
+</component>
