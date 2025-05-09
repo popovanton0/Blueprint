@@ -6,6 +6,7 @@ import androidx.compose.ui.unit.isSpecified
 import androidx.compose.ui.unit.times
 import kotlin.math.cos
 import kotlin.math.sin
+import kotlin.math.PI
 
 /**
  * Arrow extending from the dimension lines in four directions
@@ -23,14 +24,14 @@ public class Arrow(
     }
 
     internal fun projectionOnDimensionLine(strokeWidth: Dp): Dp =
-        cos(Math.toRadians(angle.toDouble())) * (length + strokeWidth)
+        cos(toRadians(angle.toDouble())) * (length + strokeWidth)
 
     internal fun projectionOnExtendingLine(strokeWidth: Dp): Dp =
-        sin(Math.toRadians(angle.toDouble())) * (length + strokeWidth)
+        sin(toRadians(angle.toDouble())) * (length + strokeWidth)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (javaClass != other?.javaClass) return false
+        if (other == null || this::class != other::class) return false
 
         other as Arrow
 
@@ -48,3 +49,5 @@ public class Arrow(
         return result
     }
 }
+
+private fun toRadians(angle: Double) = angle * PI / 180.0

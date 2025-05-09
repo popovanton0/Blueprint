@@ -1,6 +1,7 @@
 package com.popovanton0.blueprint.dsl
 
 import com.popovanton0.blueprint.ExperimentalBlueprintApi
+import kotlin.jvm.JvmInline
 
 @JvmInline
 public value class MeasureUnit private constructor(private val value: Int) {

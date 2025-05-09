@@ -73,7 +73,7 @@ import com.popovanton0.blueprint.dsl.Position.Vertical.Companion.Bottom
 import com.popovanton0.blueprint.dsl.Position.Vertical.Companion.Top
 import com.popovanton0.blueprint.dsl.SizeUnits
 import com.popovanton0.blueprint.dsl.VerticalGroup
-import java.util.Locale
+import kotlin.math.pow
 import kotlin.math.roundToInt
 import kotlin.random.Random
 
@@ -723,7 +723,12 @@ private fun Float.pxToDimensionLabel(
  */
 private fun Float.format(precision: Int): String =
     if (this % 1 == 0f) this.toInt().toString()
-    else String.format(Locale.ENGLISH, "%.${precision}f", this)
+    else {
+        val precisionDecimals = 10.0.pow(precision).toInt()
+        val beforeDecimals = this.roundToInt()
+        val afterDecimals = ((this * precisionDecimals).toInt() % precisionDecimals)
+        "${beforeDecimals}.${afterDecimals}"
+    }
 
 private fun randomBrush() = SolidColor(Color(Random(0).nextLong()).copy(alpha = 0.6f))
 
@@ -768,7 +773,8 @@ private val LabelTextStyle = TextStyle.Default.copy(
     color = Color.Black,
     textAlign = TextAlign.Center,
     lineHeight = 8.sp,
-    platformStyle = PlatformTextStyle(includeFontPadding = false),
+    //platformStyle = PlatformTextStyle(includeFontPadding = false),
+    //platformStyle = PlatformTextStyle(spanStyle = null, paragraphStyle = null),
     lineHeightStyle = LineHeightStyle(
         LineHeightStyle.Alignment.Center,
         LineHeightStyle.Trim.None
