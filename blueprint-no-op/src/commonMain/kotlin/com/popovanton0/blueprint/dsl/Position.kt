@@ -1,6 +1,7 @@
 package com.popovanton0.blueprint.dsl
 
 import androidx.compose.runtime.Immutable
+import kotlin.jvm.JvmInline
 
 @Immutable
 public sealed interface Position {
