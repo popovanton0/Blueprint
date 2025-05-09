@@ -2,7 +2,6 @@
 
 package com.popovanton0.blueprint.app
 
-import android.content.res.Configuration
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
@@ -56,8 +55,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.PlatformTextStyle
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -73,8 +70,6 @@ import com.popovanton0.blueprint.dsl.Position.Vertical.Companion.Bottom
 import com.popovanton0.blueprint.dsl.Position.Vertical.Companion.Top
 import kotlinx.coroutines.delay
 
-@Preview(fontScale = 1.0f)
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 internal fun Lab() = Preview {
     CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
@@ -89,9 +84,8 @@ internal fun Preview(content: @Composable () -> Unit) =
         Surface(content = content)
     }
 
-@Preview
 @Composable
-fun Sample() = Preview {
+fun Sample(loremIpsumText: String) = Preview {
     LazyRow {
         items(4) {
             Button(onClick = { /*TODO*/ }) {
@@ -99,14 +93,12 @@ fun Sample() = Preview {
                     imageVector = Icons.Default.Home,
                     contentDescription = null
                 )
-                Text(text = LoremIpsum(6).values.joinToString(separator = " "))
+                Text(text = loremIpsumText)
             }
         }
     }
 }
 
-@Preview(widthDp = 750)
-@Preview(widthDp = 750, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun ManyButtonsSample() = Preview {
     data class State(
@@ -193,8 +185,6 @@ fun ManyButtonsSample() = Preview {
     }
 }
 
-@Preview(widthDp = 500)
-@Preview(widthDp = 500, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun NavigationBarSample() = Preview {
     var selectedItem by remember { mutableIntStateOf(0) }
@@ -407,9 +397,9 @@ private fun ButtonDemo2() = Box {
                         text = "Lorem ".repeat(1),
                         fontSize = textSize.value.sp,
                         style = LocalTextStyle.current.copy(
-                            platformStyle = PlatformTextStyle(
-                                includeFontPadding = false
-                            )
+//                            platformStyle = PlatformTextStyle(
+//                                includeFontPadding = false
+//                            )
                         )
                     )
                     Text(
@@ -417,9 +407,9 @@ private fun ButtonDemo2() = Box {
                         text = "Lorem ".repeat(2),
                         fontSize = 13.sp,
                         style = LocalTextStyle.current.copy(
-                            platformStyle = PlatformTextStyle(
-                                includeFontPadding = false
-                            )
+//                            platformStyle = PlatformTextStyle(
+//                                includeFontPadding = false
+//                            )
                         )
                     )
                 }

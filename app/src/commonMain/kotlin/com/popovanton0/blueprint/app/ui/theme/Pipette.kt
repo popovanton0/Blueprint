@@ -1,6 +1,5 @@
 package com.popovanton0.blueprint.app.ui.theme
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -11,7 +10,7 @@ import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.unit.dp
 
-@SuppressLint("MutableCollectionMutableState")
+
 @Composable
 internal fun Pipette() {
     var markers by remember {
