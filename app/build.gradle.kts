@@ -94,22 +94,3 @@ compose.desktop {
         mainClass = "com.popovanton0.blueprint.app.MainKt"
     }
 }
-
-//dependencies {
-//    implementation(project(":blueprint"))
-//
-//    implementation(libs.androidx.coreKtx)
-//    implementation(libs.androidx.lifecycleRuntimeKtx)
-//    implementation(libs.androidx.activityCompose)
-//
-//    implementation(libs.androidx.compose.ui)
-//    implementation(libs.androidx.compose.ui.tooling.preview)
-//    implementation(libs.androidx.compose.material)
-//    implementation(libs.androidx.compose.icons)
-//    debugImplementation(libs.androidx.compose.ui.tooling)
-//    debugImplementation(libs.androidx.compose.ui.testManifest)
-//
-//    testImplementation(libs.junit)
-//    androidTestImplementation(libs.androidx.testJunit)
-//    androidTestImplementation(libs.androidx.compose.ui.testJunit)
-//}

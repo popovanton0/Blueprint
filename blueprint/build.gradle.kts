@@ -108,25 +108,6 @@ android {
 tasks.named("assemble") {
     dependsOn("check")
 }
-//
-//dependencies {
-//    implementation(libs.androidx.compose.ui.util)
-//    implementation(libs.androidx.compose.ui)
-//    implementation(libs.androidx.compose.foundation)
-//    implementation(libs.androidx.annotation)
-//
-//    debugImplementation(libs.androidx.compose.ui.tooling)
-//    debugImplementation(libs.androidx.compose.ui.testManifest)
-//
-//    testImplementation(libs.junit)
-//    implementation(libs.androidx.compose.ui.tooling)
-//    testImplementation(libs.androidx.compose.material)
-//    testImplementation(libs.testParameterInjector)
-//    testImplementation(libs.equalsverifier)
-//
-//    androidTestImplementation(libs.androidx.testJunit)
-//    androidTestImplementation(libs.androidx.compose.ui.testJunit)
-//}
 
 group = "com.popovanton0.blueprint"
 version = libs.versions.blueprint.get()
