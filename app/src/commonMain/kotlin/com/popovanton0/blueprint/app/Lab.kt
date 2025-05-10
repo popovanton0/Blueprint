@@ -396,21 +396,13 @@ private fun ButtonDemo2() = Box {
                         modifier = Modifier.blueprintId("text"),
                         text = "Lorem ".repeat(1),
                         fontSize = textSize.value.sp,
-                        style = LocalTextStyle.current.copy(
-//                            platformStyle = PlatformTextStyle(
-//                                includeFontPadding = false
-//                            )
-                        )
+                        style = LocalTextStyle.current
                     )
                     Text(
                         modifier = Modifier.blueprintId("text2"),
                         text = "Lorem ".repeat(2),
                         fontSize = 13.sp,
-                        style = LocalTextStyle.current.copy(
-//                            platformStyle = PlatformTextStyle(
-//                                includeFontPadding = false
-//                            )
-                        )
+                        style = LocalTextStyle.current
                     )
                 }
             }
@@ -433,7 +425,7 @@ private fun ButtonDemo2() = Box {
 }
 
 @Composable
-private fun PetriDish() {
+internal fun PetriDish() {
     BorderStroke::class
     Arrow::class
     Blueprint(

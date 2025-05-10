@@ -2,7 +2,6 @@
 
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
-
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.kotlin.plugin.compose)
@@ -21,6 +20,16 @@ kotlin {
         }
     }
     jvm("desktop")
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
+            baseName = "blueprintDemoCompose"
+            isStatic = true
+        }
+    }
 
     applyDefaultHierarchyTemplate()
 
@@ -37,12 +46,13 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.materialIconsExtended)
-            implementation(compose.preview)
-            implementation(compose.uiTooling)
-            implementation(compose.uiUtil)
         }
 
         androidMain.dependencies {
+            implementation(compose.preview)
+            implementation(compose.uiTooling)
+            implementation(compose.uiUtil)
+
             implementation(libs.androidx.coreKtx)
             implementation(libs.androidx.lifecycleRuntimeKtx)
             implementation(libs.androidx.activityCompose)
@@ -55,6 +65,9 @@ kotlin {
         val desktopMain by getting
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
+            implementation(compose.preview)
+            implementation(compose.uiTooling)
+            implementation(compose.uiUtil)
         }
     }
 
