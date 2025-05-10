@@ -1,6 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 
@@ -26,13 +25,6 @@ kotlin {
         }
     }
     jvm("desktop")
-    js {
-        browser()
-        useEsModules()
-    }
-
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs { browser() }
     listOf(
         iosX64(),
         iosArm64(),
