@@ -773,8 +773,6 @@ private val LabelTextStyle = TextStyle.Default.copy(
     color = Color.Black,
     textAlign = TextAlign.Center,
     lineHeight = 8.sp,
-    //platformStyle = PlatformTextStyle(includeFontPadding = false),
-    //platformStyle = PlatformTextStyle(spanStyle = null, paragraphStyle = null),
     lineHeightStyle = LineHeightStyle(
         LineHeightStyle.Alignment.Center,
         LineHeightStyle.Trim.None
