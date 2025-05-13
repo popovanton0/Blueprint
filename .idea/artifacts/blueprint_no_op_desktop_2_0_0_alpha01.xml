@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="blueprint-no-op-desktop-2.0.0-alpha01">
+    <output-path>$PROJECT_DIR$/blueprint-no-op/build/libs</output-path>
+    <root id="archive" name="blueprint-no-op-desktop-2.0.0-alpha01.jar">
+      <element id="module-output" name="Blueprint.blueprint-no-op.desktopMain" />
+    </root>
+  </artifact>
+</component>

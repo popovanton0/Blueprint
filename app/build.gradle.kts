@@ -1,8 +1,76 @@
 @file:Suppress("UnstableApiUsage")
 
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.kotlin.plugin.compose)
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.compose)
+}
+
+kotlin {
+    androidTarget {
+        compilations.all {
+            compileTaskProvider.configure {
+                compilerOptions {
+                    jvmTarget.set(JvmTarget.JVM_17)
+                }
+            }
+        }
+    }
+    jvm("desktop")
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach {
+        it.binaries.framework {
+            baseName = "blueprintDemoCompose"
+            isStatic = true
+        }
+    }
+
+    applyDefaultHierarchyTemplate()
+
+    sourceSets {
+        all {
+            languageSettings {
+                optIn("androidx.compose.ui.ExperimentalComposeUiApi")
+                optIn("com.popovanton0.blueprint.ExperimentalBlueprintApi")
+            }
+        }
+
+        commonMain.dependencies {
+            implementation(project(":blueprint"))
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.materialIconsExtended)
+        }
+
+        androidMain.dependencies {
+            implementation(compose.preview)
+            implementation(compose.uiTooling)
+            implementation(compose.uiUtil)
+
+            implementation(libs.androidx.coreKtx)
+            implementation(libs.androidx.lifecycleRuntimeKtx)
+            implementation(libs.androidx.activityCompose)
+            // note, these should have been debugImplementations,
+            // but that does not seem to work
+            implementation(libs.androidx.compose.ui.tooling)
+            implementation(libs.androidx.compose.ui.testManifest)
+        }
+
+        val desktopMain by getting
+        desktopMain.dependencies {
+            implementation(compose.desktop.currentOs)
+            implementation(compose.preview)
+            implementation(compose.uiTooling)
+            implementation(compose.uiUtil)
+        }
+    }
+
 }
 
 android {
@@ -12,7 +80,7 @@ android {
     defaultConfig {
         applicationId = "com.popovanton0.blueprint.app"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = libs.versions.compileSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -30,30 +98,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
-        freeCompilerArgs = listOf("-opt-in=androidx.compose.ui.ExperimentalComposeUiApi")
-    }
-    buildFeatures.compose = true
-    composeOptions.kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+
     packagingOptions.resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
 }
 
-dependencies {
-    implementation(project(":blueprint"))
-
-    implementation(libs.androidx.coreKtx)
-    implementation(libs.androidx.lifecycleRuntimeKtx)
-    implementation(libs.androidx.activityCompose)
-
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material)
-    implementation(libs.androidx.compose.icons)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.testManifest)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.testJunit)
-    androidTestImplementation(libs.androidx.compose.ui.testJunit)
+compose.desktop {
+    application {
+        mainClass = "com.popovanton0.blueprint.app.MainKt"
+    }
 }
